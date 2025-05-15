@@ -7,6 +7,13 @@ class DivanLightingSpider(scrapy.Spider):
     allowed_domains = ['divan.ru']
     start_urls = ['https://www.divan.ru/category/svet']
 
+    # Настройки для экспорта в CSV
+    custom_settings = {
+        'FEED_FORMAT': 'csv',
+        'FEED_URI': 'divan_lighting_products.csv',
+        'FEED_EXPORT_FIELDS': ['name', 'price', 'link'],  # Порядок колонок в CSV
+    }
+
     def parse(self, response):
         # Парсим список товаров на странице
         products = response.css('div._Ud0k')
